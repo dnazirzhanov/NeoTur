@@ -23,3 +23,11 @@ class UserCreateSerializer(ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
+
+class PhoneNumberSerializer(ModelSerializer):
+    phone_number = PhoneNumberField()
+
+    class Meta:
+        model = User
+        fields = ["phone_number"]
