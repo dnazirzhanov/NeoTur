@@ -31,3 +31,22 @@ class PhoneNumberSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ["phone_number"]
+
+
+class LoginUserSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        username = data.pop('username', None)
+        password = data.pop('password', None)
+
+        if username and password:
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                data['user'] = user
+            else:
+                raise serializers.ValidationError("Пользователь с таким логином и паролем не найден.")
+        else:
+            raise serializers.ValidationError("Необходимо указать логин и пароль.")
+        return data
