@@ -8,3 +8,5 @@ class CreateUsers(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
 
+
+
