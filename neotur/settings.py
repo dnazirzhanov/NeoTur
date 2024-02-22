@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'tours',
     'rest_framework',
     'rest_framework_simplejwt',
+    'order'
 ]
 
 MIDDLEWARE = [
