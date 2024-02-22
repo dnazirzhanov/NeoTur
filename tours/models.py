@@ -18,7 +18,7 @@ class Tours(models.Model):
     description = models.TextField()
     is_active = models.BooleanField(default=False)
     best_for_season = models.CharField(max_length=20)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.name
