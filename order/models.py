@@ -7,5 +7,9 @@ class Order(models.Model):
     quantity = models.IntegerField()
     total_price = models.IntegerField()
 
+    def __str__(self):
+        return f"{self.user.first_name} - {self.total_price}"
+
+
 
 
