@@ -23,3 +23,20 @@ class LoginUserView(views.APIView):
                             status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
+
+
+class SetPhoneNumberAPIView(views.APIView):
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, *args, **kwargs):
+        user = request.user
+        serializer = PhoneNumberSerializer(user, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        verify_code = "1234"
+        user.verify_code = verify_code
+        user.save()
+        return Response(
+            {'message': 'Код отправлен на ваш номер.'},
+            status=status.HTTP_200_OK
+        )
