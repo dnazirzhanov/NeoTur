@@ -1,15 +1,17 @@
 from django.shortcuts import render
 from .models import User
-from .serializers import UserCreateSerializer, PhoneNumberSerializer
+from .serializers import UserCreateSerializer, PhoneNumberSerializer, LoginUserSerializer, UserProfileSerializer
 from rest_framework.generics import CreateAPIView
-
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics
 
 class CreateUsersAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
 
 
-class LoginUserView(views.APIView):
+class LoginUserView(APIView):
     serializer_class = LoginUserSerializer
 
     def post(self, request, *args, **kwargs):
@@ -25,7 +27,7 @@ class LoginUserView(views.APIView):
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
 
-class SetPhoneNumberAPIView(views.APIView):
+class SetPhoneNumberAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def put(self, request, *args, **kwargs):
@@ -43,7 +45,7 @@ class SetPhoneNumberAPIView(views.APIView):
 
 
 class UserProfileAPIView(generics.RetrieveUpdateAPIView):
-    queryset = CustomUser.objects.all()
+    queryset = User.objects.all()
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
 

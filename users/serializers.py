@@ -55,5 +55,5 @@ class LoginUserSerializer(serializers.Serializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=False)
     class Meta:
-        model = CustomUser
+        model = User
         fields = ["first_name", "last_name", "username", "email", "avatar", "birth_date", "phone_number"]

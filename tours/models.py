@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import DateField
+
 
 class TourCategory(models.Model):
     name = models.CharField(max_length=50)
@@ -21,6 +23,6 @@ class Tours(models.Model):
 
 
 class Recommendation(models.Model):
-    current_time = models.DateField(auto_add_now=True)
+    current_time = models.DateField(auto_now_add=True)
     tours = models.OneToOneField(Tours, on_delete=models.CASCADE)
 
