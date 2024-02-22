@@ -2,7 +2,7 @@ from .models import Order
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from rest_framework.fields import SerializerMethodField
-from tours.models import Tour
+from tours.models import Tours
 
 class OrderSerializer(ModelSerializer):
     total_price = SerializerMethodField('get_total_price')
