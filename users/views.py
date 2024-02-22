@@ -4,7 +4,7 @@ from .serializers import UserCreateSerializer, PhoneNumberSerializer
 from rest_framework.generics import CreateAPIView
 
 
-class CreateUsers(CreateAPIView):
+class CreateUsersAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
 
