@@ -9,4 +9,17 @@ class CreateUsers(CreateAPIView):
     serializer_class = UserCreateSerializer
 
 
+class LoginUserView(views.APIView):
+    serializer_class = LoginUserSerializer
 
+    def post(self, request, *args, **kwargs):
+        serializer = LoginUserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            refresh = RefreshToken.for_user(user)
+            access = str(refresh.access_token)
+
+            return Response({'user_id': user.id, 'access': access, 'refresh': str(refresh)},
+                            status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
