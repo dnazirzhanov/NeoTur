@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Tours, TourCategory, Recommendation
 
-# Register your models here.
+admin.site.register(Tours)
+admin.site.register(TourCategory)
+admin.site.register(Recommendation)
