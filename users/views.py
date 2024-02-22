@@ -40,3 +40,13 @@ class SetPhoneNumberAPIView(views.APIView):
             {'message': 'Код отправлен на ваш номер.'},
             status=status.HTTP_200_OK
         )
+
+
+class UserProfileAPIView(generics.RetrieveUpdateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+
+    def get_object(self):
+        return self.request.user

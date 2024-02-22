@@ -50,3 +50,10 @@ class LoginUserSerializer(serializers.Serializer):
         else:
             raise serializers.ValidationError("Необходимо указать логин и пароль.")
         return data
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required=False)
+    class Meta:
+        model = CustomUser
+        fields = ["first_name", "last_name", "username", "email", "avatar", "birth_date", "phone_number"]
